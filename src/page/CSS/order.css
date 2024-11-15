@@ -1,0 +1,188 @@
+
+
+.background-empty{
+    height: 30px;
+    background-color: #f5f5f5;
+}
+.Order-title{
+    padding-left: 225px;
+    background-color: #f6f7f9;
+    color: var(--primary-color);
+    font-size: 2.5rem;
+}
+.inforOrder-cart{
+    margin: 0 auto;
+    width: 800px;
+    height: auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 16px;
+}
+.inforOrder{
+    margin: 0 auto;
+    margin-top: 50px;
+    width: 800px;
+    height: auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 16px;
+}
+.inforOrder-infor{
+    padding-bottom: 70px;
+    height: auto;
+}
+.inforOrder__header{
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 28px;
+    letter-spacing: .005em;
+    color: var(--gray-1000);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+}
+.inforOrder__header-icon{
+    color: var(--primary-color);
+}
+.inforOrder__header-title{
+    font-size: 1.8rem;
+    font-weight: 500px;
+}
+.customerInfor{
+    background: #f6f7f9;
+    border-radius: 8px;
+    padding: 16px;
+}
+.customerInfor-name-phone{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+.input-infor{
+    width: 100%;
+    background: var(--white);
+    box-shadow: 0 0 0 1px var(--gray-400);
+    border-radius: 8px;
+    padding: 16px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    border-radius: 16px;
+    outline: none;
+    border:1px solid #a29f9f  ;
+}
+.customerAddress{
+    margin-top: 15px;
+    padding: 16px;
+    background-color: #f6f7f9;
+}
+.input-infor_1-2{
+    width: 350px;
+}
+.input-infor_1-0{
+    margin-top: 30px;
+    width: 100%;
+}
+.input-infor-input-infor_1-3-wrap{
+    display: flex;
+    justify-content: space-between;
+}
+.btn-pay{
+    margin-left: 560px;
+    margin-top: 45px;
+    color: white;
+    background-color: var(--primary-color);
+    width: 200px;
+    height: 50px;
+    font-size: 1.8rem;
+    border-radius: 15px;
+}
+.order-list-product{
+    margin-left: auto;
+}
+.product-order-quantity{
+    font-size: 1.4rem;
+    width: 15%;
+    text-align: center;
+    color: var(--text-color);
+}
+.product-order-header{
+    border-bottom: 1px solid #e1dada;
+}
+/* Thanh toán thành công */
+.modal-body__success{
+    width: 420px;
+    height: 280px;
+    margin: auto;
+    background-color: var(--white-color);
+    z-index: 2;
+    border-radius: 5px;
+    animation: growth linear 0.1s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.modal-body__success-icon{
+    font-size: 8rem;
+    color: #61c261;
+    margin-top: 10px;
+}
+.modal-body__success span{
+    font-size: 3rem;
+    margin-top: 40px;
+}
+.modal-body__success-button{
+    margin-top: 60px;
+    width: 86px;
+    height: 42px;
+    background-color: #61c261;
+    color: white;
+    border: none;
+    font-size: 1.6rem;
+    cursor: pointer;
+}
+/* Phương thức thanh toán */
+.pay-order-select{
+    width: 280px;
+    cursor: pointer;
+    position: relative;
+    padding: 16px;
+    background-color:white ;
+    margin-top: 30px;
+    border-radius: 5px;
+}
+
+.pay-order-select-list{
+    padding-left: 16px;
+    list-style: none;
+    left: 0;
+    right: 0;
+    top: 40px;
+}
+.pay-order-select-item{
+    font-size: 1.6rem;
+    padding: 12px 0;
+}
+.pay-order-select-item__input{
+    margin-right: 10px;
+}
+.pay-order-select-item__input:checked::before{
+    background-color: var(--primary-color);
+}
+
+
+/* pay online */
+.pay-online{
+    margin-top: 20px;
+    background-color: #f6f7f9 ;
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+}
+.pay-online-input{
+    width: 100%;
+}
+.product-order-price-total-number {
+    color: var(--primary-color);
+}

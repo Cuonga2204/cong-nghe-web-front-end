@@ -1,0 +1,129 @@
+.cart-title{
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 2rem;
+    padding: 15px 0;
+}
+/* cart-title */
+.cart-title{
+    
+}
+.cart-header{
+    height: 55px;
+    padding: 0 20px;
+    display: flex;
+    background-color: white;
+    align-items: center;
+    /* justify-content: space-between; */
+}
+.cart-header__button{
+    width: 18px;
+    height: 18px;
+    background-color:transparent;
+    border: 1px solid rgba(0, 0, 0, .14);
+    border-radius: 2px;
+}
+.cart-header__check{
+    border: 1px solid rgba(0, 0, 0, .14);
+    border-radius: 2px;
+    box-shadow: inset 0 2px 0 0 rgba(0, 0, 0, .02);
+    height: 16px;
+    margin-right: 8px;
+    text-align: center;
+    width: 16px;
+    
+}
+.cart-header__name{
+    font-weight: 500;
+    font-size: 1.6rem;
+    width: 46%;
+    display: flex;
+    align-items: center;
+}
+.cart-header__price{
+    margin-left: auto;
+    width: 15%;
+    font-size: 1.6rem;
+
+    text-align: center; 
+    color: var(--text-color);
+}
+.cart-header__quantity{
+    font-size: 1.6rem;
+    width: 15%;
+    text-align: center;
+    color:var(--text-color);
+}
+.cart-header__cart-header__price-total{
+    width: 11%;
+    text-align: center;
+    color: var(--text-color);
+    font-size: 1.6rem;
+}
+
+.cart-header__operation{
+    font-size: 1.6rem;
+    width: 12%;
+    text-align: center;
+    color:var(--text-color);
+}
+/* Cart-product-by */
+.cart-product-by{
+    background-color: white;
+    /* margin-bottom: 40px; */
+}
+.cart-product-by-list{
+    padding-left: 0;
+    margin-bottom: 0;
+}
+.cart-product-by-item{
+    display: flex;
+    height: 70px;
+    padding: 0 20px;
+    display: flex;
+    background-color: white;
+    align-items: center;
+}
+
+.cart-header__name img{
+    width: 60px;
+    height: 60px;
+}
+.cart-header__operation-icon{
+    color: var(--primary-color);
+    font-size: 20px;
+    cursor: pointer;
+}
+.background-bottom{
+    height: 100px;
+    background-color: #f5f5f5;
+}
+/* cart-product-pay */
+.cart-product-pay{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 20px;
+    margin-bottom: 10px;
+}
+.cart-product-total{
+    font-size: 1.4rem;
+    width: 15%;
+    font-weight: 500;
+    text-align: center;
+}
+.cart-product-total-price{
+    color: var(--primary-color);
+    font-size: 1.4rem;
+    width: 11%;
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: 500;
+
+}
+.btn-cart-pay{
+    width: 12%;
+    background-color: var(--primary-color);
+    color:white;
+}
+
