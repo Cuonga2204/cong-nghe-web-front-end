@@ -1,44 +1,57 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import axios from "../common/common";
 import ProductTable from "../components/admin/product/ProductTable";
-import { useAdmin } from "../context/AdminContext";
-import { useState, useEffect } from "react";
-import axios from "axios";
 import AdminPagination from "../components/admin/AdminPanigation";
+import { useAdmin } from "../context/AdminContext";
+
 export default function AdminProduct() {
-  const { products, setProducts } = useAdmin();
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5;
+  const { page } = useParams(); // Lấy số trang từ URL
+  const currentPage = Number(page) || 1; // Đảm bảo `currentPage` luôn đồng bộ với URL
+  const limit = 5;
+  const [totalPages, setTotalPages] = useState(0); // Tổng số trang
+  const { products, getListProduct } = useAdmin([]);
+  const navigate = useNavigate();
+  // console.log(products);
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         const response = await axios.get(
-          `/products?page=${currentPage}&limit=${itemsPerPage}`
+          `/product/getAll?page=${currentPage}&limit=${limit}`
         );
-        setProducts(response.data.products);
+        console.log(response);
+
+        const { totalPages } = response.data;
+        setTotalPages(totalPages);
       } catch (error) {
         console.error("Error fetching products:", error);
       }
     };
     fetchProducts();
-  }, [currentPage, setProducts]);
+    getListProduct(currentPage);
+    console.log(products);
+  }, [currentPage]);
 
-  const totalPages = Math.ceil(products.length / itemsPerPage);
+  const handlePageChange = (page) => {
+    navigate(`/admin/product/pages/${page}`); // Cập nhật URL
+  };
+
   return (
     <main className="admin-content">
-      <>
-        <p className="admin-content-title">LIST PRODUCT</p>
-        <Link to="create">
-          <button className="add-user-button">Add Product</button>
-        </Link>
-        <ProductTable products={products} />
-        <AdminPagination
-          currentPage={currentPage}
-          totalPages={totalPages}
-          onPageChange={(page) => setCurrentPage(page)}
-        />
-      </>
+      <p className="admin-content-title">LIST PRODUCT</p>
+      <button
+        className="add-user-button"
+        onClick={() => navigate("/admin/product/create")}
+      >
+        Add Product
+      </button>
+      <ProductTable products={products} />
+      <AdminPagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={handlePageChange}
+      />
     </main>
   );
 }

@@ -1,4 +1,4 @@
-import './App.css';
+
 import '../src/page/CSS/main.css';
 import '../src/page/CSS/base.css';
 import '../src/page/CSS/login.css';
@@ -31,8 +31,6 @@ import { CartProvider } from './context/CartContext.js';
 import { AdminProvider } from './context/AdminContext'; // Import AdminProvider
 import { ProductProvider } from './context/ProductContext.js';
 import axios from 'axios';
-import ProductTable from './components/admin/product/ProductTable.jsx';
-import UserTable from './components/admin/user/UserTable.jsx';
 import AdminProduct from './page/AdminProduct.jsx';
 import AdminUser from './page/AdminUser.jsx';
 function App() {
@@ -78,13 +76,15 @@ function App() {
                 <Route path="/admin" element={<AdminLayout />}>
                   <Route path="/admin" element={<Admin />} />
                   <Route path="user" element={<AdminUser />} />
+                  <Route path="product/:productId" element={<ViewProduct />} />
+                  <Route path="product/pages/:page" element={<AdminProduct />} />
                   <Route path="product" element={<AdminProduct />} />
                   <Route path="user/create" element={<CreateUser />} />
                   <Route path="user/update/:userId" element={<UpdateUser />} />
                   <Route path="user/:userId" element={<ViewUser />} />
                   <Route path="product/create" element={<CreateProduct />} />
                   <Route path="product/update/:productId" element={<UpdateProduct />} />
-                  <Route path="product/:productId" element={<ViewProduct />} />
+
                 </Route>
               </Routes>
             </div>

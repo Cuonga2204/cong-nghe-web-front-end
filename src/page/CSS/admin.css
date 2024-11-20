@@ -558,19 +558,22 @@ input[type="tel"]:focus {
   margin: 0 5px;
   cursor: pointer;
 }
-
+.pagination-item__icon{
+  border: none;
+  background: none;
+  color: gray;
+  font-size: 16px;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 4px; /* Làm bo góc */
+  transition: all 0.3s ease; /* Hiệu ứng khi hover */
+}
 .pagination-button.active {
   background-color: var(--primary-color);
   color: white;
   font-weight: bold;
 }
-
-.pagination-button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-button {
+.button {
   background: none;
   border: none;
   color: #333;
@@ -578,7 +581,3 @@ button {
   font-size: 1.2em;
 }
 
-button:disabled {
-  color: #ccc;
-  cursor: not-allowed;
-}

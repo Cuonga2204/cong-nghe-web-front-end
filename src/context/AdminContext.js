@@ -32,18 +32,18 @@ export const AdminProvider = ({ children }) => {
         }
     }
 
-    async function getListProduct() {
+    async function getListProduct(page = 1, limit = 5) {
         try {
-            const response = await axios.get("/product/getAll");
+            const response = await axios.get(`/product/getAll?page=${page}&limit=${limit}`);
             if (response.status === 200 && response.data.data) {
                 const fetchedProducts = response.data.data.map((product, index) => ({
-                    stt: index + 1,
+                    stt: (page - 1) * limit + index + 1,
                     id: product._id,
                     name: product.name,
                     price: product.currentPrice,
                     imageUrl: product.imageUrl,
                 }));
-                setProducts(fetchedProducts);
+                setProducts(fetchedProducts); // Cập nhật danh sách sản phẩm
             }
         } catch (error) {
             console.log(error);

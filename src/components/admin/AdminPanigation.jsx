@@ -1,20 +1,31 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
+
 const AdminPagination = ({ currentPage, totalPages, onPageChange }) => {
+  // Xử lý khi nhấn nút "Trang trước"
+  console.log(totalPages);
+
   const handlePrevPage = () => {
     if (currentPage > 1) onPageChange(currentPage - 1);
   };
 
+  // Xử lý khi nhấn nút "Trang sau"
   const handleNextPage = () => {
     if (currentPage < totalPages) onPageChange(currentPage + 1);
   };
 
   return (
     <div className="pagination-container">
-      <button onClick={handlePrevPage} disabled={currentPage === 1}>
-        <FontAwesomeIcon icon={faAngleLeft} className="pagination-item__icon" />
+      {/* Nút "Trang trước" */}
+      <button
+        onClick={handlePrevPage}
+        disabled={currentPage === 1} // Vô hiệu hóa nếu đang ở trang đầu
+        className="pagination-item__icon"
+      >
+        <FontAwesomeIcon icon={faAngleLeft} />
       </button>
+      {/* Nút số trang */}
       {[...Array(totalPages)].map((_, index) => (
         <button
           key={index}
@@ -26,11 +37,13 @@ const AdminPagination = ({ currentPage, totalPages, onPageChange }) => {
           {index + 1}
         </button>
       ))}
-      <button onClick={handleNextPage} disabled={currentPage === totalPages}>
-        <FontAwesomeIcon
-          icon={faAngleRight}
-          className="pagination-item__icon"
-        />
+      {/* Nút "Trang sau" */}
+      <button
+        onClick={handleNextPage}
+        disabled={currentPage === totalPages} // Vô hiệu hóa nếu đang ở trang cuối
+        className="pagination-item__icon"
+      >
+        <FontAwesomeIcon icon={faAngleRight} />
       </button>
     </div>
   );
