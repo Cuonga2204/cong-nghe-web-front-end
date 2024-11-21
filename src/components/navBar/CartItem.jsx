@@ -2,12 +2,13 @@ import React, { useContext } from "react";
 import { CartContext } from "../../context/CartContext";
 import { Link } from "react-router-dom";
 import { formatPrice } from "../utility/format";
-const CartItem = ({ id, imageUrl, name, currentPrice, quantity }) => {
+const CartItem = ({ id, imageProduct, name, currentPrice, quantity }) => {
   const { removeFromCart } = useContext(CartContext);
+  // console.log(id);
   return (
     <li className="header__cart-item">
       <Link className="product-link" to={`/products/${id}`}>
-        <img src={imageUrl} alt={name} className="header__cart-img" />
+        <img src={imageProduct} alt={name} className="header__cart-img" />
       </Link>
       <div className="header__cart-item-info">
         <div className="header__cart-item-head">

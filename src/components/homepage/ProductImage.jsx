@@ -3,8 +3,6 @@ import ProductBadge from "./ProductBadge";
 import { Link } from "react-router-dom";
 
 export default function ProductImage({ imageUrl, backgroundUrl }) {
-  console.log(`http://localhost:4000/${imageUrl}`);
-
   return (
     <>
       <div

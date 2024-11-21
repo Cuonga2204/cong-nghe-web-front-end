@@ -5,14 +5,8 @@ import AuthFormInput from "../components/authForm/AuthFormInput";
 import { useState } from "react";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
-// import * as UserService from "../services/UserService";
 import axios from "../common/common";
-// import { useMutation } from "@tanstack/react-query";
-// import { useMutationHooks } from "../hooks/useMutationHooks";
 export const Login = () => {
-  // const mutation = useMutationHooks((data) => UserService.loginUser(data));
-  // console.log("mutation", mutation);
-  // console.log(UserService.loginUser());
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -30,16 +24,16 @@ export const Login = () => {
 
       if (response.status === 200) {
         const accessToken = response.data.access_token;
-        const refreshToken = response.data.refresh_token;
+
         const payloadDecode = jwtDecode(accessToken).payload;
 
+        localStorage.setItem("access_token", accessToken);
+        localStorage.setItem("userId", payloadDecode.id);
         if (payloadDecode.isAdmin === true) {
           navigate("/admin");
         } else {
           navigate("/");
         }
-        localStorage.setItem("access_token", accessToken);
-        localStorage.setItem("refresh_token", refreshToken);
       }
     } catch (error) {
       console.log("Error handleLogin", error);

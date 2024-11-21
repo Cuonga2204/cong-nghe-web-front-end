@@ -22,11 +22,11 @@ const Cart = () => {
           <ul className="header__cart-list-item">
             {cartItems.map((item, index) => (
               <CartItem
-                id={item.id}
+                id={item.product}
                 key={index}
-                imageUrl={item.imageUrl}
-                name={item.name}
-                currentPrice={item.currentPrice}
+                imageProduct={`http://localhost:4000${item.imageProduct}`}
+                name={item.nameProduct}
+                currentPrice={item.price}
                 quantity={item.quantity}
               />
             ))}

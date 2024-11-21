@@ -3,8 +3,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHardDrive } from "@fortawesome/free-solid-svg-icons";
 export default function ProductConfig({ config, className }) {
   const configArray = config[0].split(",").map((item) => item.trim());
-  console.log(configArray);
-
   return (
     <div className="product-config">
       <div className={className}>
