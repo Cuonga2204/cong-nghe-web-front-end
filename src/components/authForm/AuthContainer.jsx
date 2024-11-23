@@ -5,64 +5,33 @@ import AuthFormInput from "./AuthFormInput";
 import { useState, useEffect } from "react";
 import { useMemo } from "react";
 import * as UserService from "../../services/UserService";
-// import { useMutation } from "@tanstack/react-query";
+
 import { useMutationHooks } from "../../hooks/useMutationHooks";
 export default function AuthContainer({ title }) {
-  // const DEFAULT_ACCOUNTS = useMemo(
-  //   () => [
-  //     {
-  //       email: "Cuong123",
-  //       password: "123",
-  //     },
-  //     {
-  //       email: "manh123",
-  //       password: "123",
-  //     },
-  //   ],
-  //   []
-  // );
+  
   const mutation = useMutationHooks((data) => UserService.loginUser(data));
   console.log("mutation", mutation);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  // const [listAccount, setListAccount] = useState(DEFAULT_ACCOUNTS);
   const handleEmailChange = (e) => setEmail(e.target.value);
   const handlePasswordChange = (e) => setPassword(e.target.value);
   const handleConfirmPasswordChange = (e) => setConfirmPassword(e.target.value);
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   const storedAccounts = JSON.parse(localStorage.getItem("listAccount"));
-  //   if (storedAccounts) {
-  //     setListAccount(storedAccounts);
-  //   } else {
-  //     localStorage.setItem("listAccount", JSON.stringify(DEFAULT_ACCOUNTS));
-  //   }
-  // }, [DEFAULT_ACCOUNTS]);
 
   const handleSignUp = () => {
     if (password !== confirmPassword) {
       alert("Mật khẩu không khớp!");
       return;
     }
-    // Store user details in localStorage
-    // const newAccount = [...listAccount, { email: email, password: password }];
-    // localStorage.setItem("listAccount", JSON.stringify(newAccount));
+    
     alert("Đăng ký thành công!");
   };
 
   const handleLogin = () => {
-    // const storedAccounts = JSON.parse(localStorage.getItem("listAccount"));
-    // const foundAccount = storedAccounts.find(
-    //   (account) => account.email === email && account.password === password
-    // );
-    // if (foundAccount) {
-    //   navigate("/"); // Điều chỉnh đường dẫn tới trang chủ của bạn
-    // } else {
-    //   alert("Email hoặc mật khẩu không đúng!");
-    // }
+    
   };
 
   return (
