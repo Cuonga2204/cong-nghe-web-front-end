@@ -1,6 +1,8 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import Breadcrumb from "../components/homeProduct/Breadcrumb";
+import { useParams } from "react-router-dom";
+import Breadcrumb from "../components/homeProduct/Breadcrumb";
 
 import { useContext } from "react";
 import { ProductContext } from "../context/ProductContext";
