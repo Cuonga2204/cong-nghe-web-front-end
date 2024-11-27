@@ -1,14 +1,32 @@
-import React, { Children, createContext, useContext, useState } from 'react';
-import DEFAULT__PRODUCTS from '../mockData/DefaultProduct';
-const ProductsContext = createContext();
-export function ProductsProvider({ Children }) {
-    const [products, setProducts] = useState(DEFAULT__PRODUCTS);
+// src/context/ProductContext.js
+import React, { createContext, useState, useEffect } from 'react';
+import axios from 'axios';
+
+// Khởi tạo ProductContext
+export const ProductContext = createContext();
+
+export const ProductProvider = ({ children }) => {
+    const [products, setProducts] = useState([]);
+
+    useEffect(() => {
+        // Hàm lấy tất cả sản phẩm
+        const getAllProduct = async () => {
+            try {
+                const response = await axios.get('/product/getAll');
+                if (response.status === 200) {
+                    setProducts(response.data.data);
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        };
+
+        getAllProduct();
+    }, []);
+
     return (
-        <ProductsContext.Provider value={{ products }}>
-            {Children}
-        </ProductsContext.Provider>
-    )
-}
-export function useProducts() {
-    return useContext(ProductsContext)
-}
+        <ProductContext.Provider value={{ products, setProducts }}>
+            {children}
+        </ProductContext.Provider>
+    );
+};
