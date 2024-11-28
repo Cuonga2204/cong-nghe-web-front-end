@@ -1,6 +1,13 @@
 import React from "react";
+import { useFilterPrice } from "../../context/FilterPriceContext";
 export default function CategoryItem({ label, title }) {
-  
+  const inputId = `checkbox-${label}`;
+  const { updateFilterPrices } = useFilterPrice();
+  const handleItemClick = () => {
+    if (title === "Mức giá") {
+      updateFilterPrices(label);
+    }
+  };
 
   return (
     <li

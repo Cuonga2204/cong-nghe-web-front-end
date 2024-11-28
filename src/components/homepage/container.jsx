@@ -1,4 +1,5 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 import ContainerEvent from "./ContainerEvent";
 import ImageSlider from "./ImageSlider";
 import CategoryFilter from "./CategoryFilter";
@@ -8,12 +9,28 @@ import ProductList from "./ProductList";
 import Pagination from "./Pagination";
 import { FilterProvider } from "../../context/FilterContext";
 import { FilterPriceProvider } from "../../context/FilterPriceContext";
+import { useMemo } from "react";
 export default function Container({ products, filter }) {
+  const { page = 1 } = useParams(); 
   const images = [
     "/img/slideShow1.png",
     "/img/slideShow4.png",
     "/img/slideShow3.png",
   ];
+
+  const PRODUCTS_PER_PAGE = 9; 
+  const filteredProducts = useMemo(() => {
+    if (filter === "TẤT CẢ") {
+      return products;
+    }
+    return products.filter((product) => product.name.includes(filter));
+  }, [products, filter]);
+
+  const totalPages = Math.ceil(filteredProducts.length / PRODUCTS_PER_PAGE);
+
+  const startIndex = (page - 1) * PRODUCTS_PER_PAGE;
+  const endIndex = startIndex + PRODUCTS_PER_PAGE;
+  const paginatedProducts = filteredProducts.slice(startIndex, endIndex);
 
   return (
     <>
@@ -41,7 +58,10 @@ export default function Container({ products, filter }) {
                       page={parseInt(page)}
                     />
                   </div>
-                
+                  <Pagination
+                    totalPages={totalPages}
+                    currentPage={parseInt(page)}
+                  />
                 </div>
               </div>
             </div>
