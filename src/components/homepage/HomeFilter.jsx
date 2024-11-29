@@ -1,8 +1,16 @@
 import React from "react";
+import { useFilter } from "../../context/FilterContext";
 // import { sortByPrice } from "./ProductList";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
+import { useState } from "react";
 export default function HomeFilter() {
+  const { handleSort } = useFilter();
+  const [selectedSort, setSelectedSort] = useState("Giá");
+  const handleClick = (type, label) => {
+    setSelectedSort(label);
+    handleSort(type);
+  };
 
   return (
     <>

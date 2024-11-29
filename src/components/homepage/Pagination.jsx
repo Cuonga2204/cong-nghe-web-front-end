@@ -1,7 +1,9 @@
 import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import PaginationItem from "./PaginationItem";
 export default function Pagination({ totalPages, currentPage }) {
+  const pages = [...Array(totalPages).keys()].map((i) => i + 1);
 
   return (
     <ul className="pagination home-product__pagination">
