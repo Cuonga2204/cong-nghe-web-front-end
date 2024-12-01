@@ -2,8 +2,43 @@ import React from "react";
 import AuthHeader from "../components/authForm/AuthHeader";
 import { Link } from "react-router-dom";
 import AuthFormInput from "../components/authForm/AuthFormInput";
-
+import { useState } from "react";
+import { jwtDecode } from "jwt-decode";
+import { useNavigate } from "react-router-dom";
+import axios from "../common/common";
 export const Login = () => {
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  // const [listAccount, setListAccount] = useState(DEFAULT_ACCOUNTS);
+
+  const handleEmailChange = (e) => setEmail(e.target.value);
+  const handlePasswordChange = (e) => setPassword(e.target.value);
+
+  const handleLogin = async () => {
+    try {
+      const response = await axios.post("/user/sign-in", {
+        email: email,
+        password: password,
+      });
+
+      if (response.status === 200) {
+        const accessToken = response.data.access_token;
+
+        const payloadDecode = jwtDecode(accessToken).payload;
+
+        localStorage.setItem("access_token", accessToken);
+        localStorage.setItem("userId", payloadDecode.id);
+        if (payloadDecode.isAdmin === true) {
+          navigate("/admin");
+        } else {
+          navigate("/");
+        }
+      }
+    } catch (error) {
+      console.log("Error handleLogin", error);
+    }
+  };
   return (
     <>
       <AuthHeader title="Đăng nhập"></AuthHeader>
@@ -23,10 +58,16 @@ export const Login = () => {
               </div>
 
               <div className="auth-form__form">
-                <AuthFormInput placeholder="Nhập email" />
+                <AuthFormInput
+                  value={email}
+                  placeholder="Nhập email"
+                  onChange={handleEmailChange}
+                />
                 <AuthFormInput
                   type="password"
+                  value={password}
                   placeholder="Nhập mật khẩu"
+                  onChange={handlePasswordChange}
                   autoComplete="new-password"
                 />
               </div>
@@ -54,7 +95,11 @@ export const Login = () => {
                   Trở lại
                 </button>
 
-                <button type="submit" className="btn btn-primary">
+                <button
+                  type="submit"
+                  className="btn btn-primary"
+                  onClick={handleLogin}
+                >
                   Đăng nhập
                 </button>
               </div>
