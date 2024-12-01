@@ -7,19 +7,35 @@ import ProductViewAssess from "../components/homeProduct/ProductViewAssess";
 import ProductViewTransport from "../components/homeProduct/ProductViewTransport";
 import ProductQuantity from "../components/homeProduct/ProductQuantity";
 import AddProduct from "../components/homepage/AddProduct";
-import PRODUCT__DETAIL from "../mockData/ProductDetail";
 import ProductConnectItem from "../components/homeProduct/ProductConnectItem";
-import DEFAULT__PRODUCTS from "../mockData/DefaultProduct";
-import { useProducts } from "../context/ProductContext";
+import { useContext } from "react";
+import { ProductContext } from "../context/ProductContext";
 import { useState } from "react";
-export default function ProductPage({ products }) {
+export default function ProductPage() {
+  const { products } = useContext(ProductContext);
   const { productId } = useParams();
-  const product = products.find((p) => p.id === parseInt(productId, 10));
-  
+
+  const product = products.find((p) => p._id === productId);
+
+  const [quantity, setQuantity] = useState(1);
   if (!product) {
     return <div>Product not found</div>;
   }
-  
+  console.log(`http://localhost:4000${product.imageUrl}`);
+
+  const images = [
+    
+    "/img/viewProduct2.jpeg",
+    "/img/viewProduct3.jpeg",
+  ];
+  if (!product) {
+    return <div>Product not found</div>;
+  }
+  function formatPrice(price) {
+    return new Intl.NumberFormat("vi-VN", {
+      maximumSignificantDigits: 3,
+    }).format(price);
+  }
   return (
     <>
       <div className="container">
@@ -65,19 +81,25 @@ export default function ProductPage({ products }) {
                 </div>
               </div>
             </div>
-            <div className="product-detail">
-              <div
-                className="ck-content"
-                dangerouslySetInnerHTML={{ __html: PRODUCT__DETAIL[1] }}
-              />
+            <div
+              className="product-detail"
+              style={{ fontSize: "18px", lineHeight: "1.6" }}
+            >
+              <h2
+                className="product-detail-title"
+                style={{ fontSize: "24px", fontWeight: "bold" }}
+              >
+                Mô tả sản phẩm
+              </h2>
+              <div dangerouslySetInnerHTML={{ __html: product.description }} />
             </div>
             <div className="product-connect">
               <h2 className="product-connect__title">Sản phẩm liên quan</h2>
               <ul className="product-connect-list">
-                <ProductConnectItem product={DEFAULT__PRODUCTS[1]} />
-                <ProductConnectItem product={DEFAULT__PRODUCTS[2]} />
-                <ProductConnectItem product={DEFAULT__PRODUCTS[3]} />
-                <ProductConnectItem product={DEFAULT__PRODUCTS[4]} />
+                <ProductConnectItem product={products[1]} />
+                <ProductConnectItem product={products[2]} />
+                <ProductConnectItem product={products[3]} />
+                <ProductConnectItem product={products[4]} />
               </ul>
             </div>
           </div>
