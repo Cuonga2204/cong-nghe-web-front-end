@@ -14,6 +14,7 @@ import { useState } from "react";
 export default function ProductPage() {
   const { products } = useContext(ProductContext);
   const { productId } = useParams();
+  // console.log(productId);
 
   const product = products.find((p) => p._id === productId);
 
@@ -24,7 +25,8 @@ export default function ProductPage() {
   console.log(`http://localhost:4000${product.imageUrl}`);
 
   const images = [
-    
+    // product.imageUrl,
+    // `http://localhost:4000${product.imageUrl}`,
     "/img/viewProduct2.jpeg",
     "/img/viewProduct3.jpeg",
   ];
@@ -85,13 +87,13 @@ export default function ProductPage() {
               className="product-detail"
               style={{ fontSize: "18px", lineHeight: "1.6" }}
             >
-              <h2
+              {/* <h2
                 className="product-detail-title"
                 style={{ fontSize: "24px", fontWeight: "bold" }}
               >
                 Mô tả sản phẩm
-              </h2>
-              <div dangerouslySetInnerHTML={{ __html: product.description }} />
+              </h2> */}
+              {/* <div dangerouslySetInnerHTML={{ __html: product.description }} /> */}
             </div>
             <div className="product-connect">
               <h2 className="product-connect__title">Sản phẩm liên quan</h2>
