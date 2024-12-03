@@ -112,19 +112,6 @@ export default function OrderStatus() {
                 />
               </div>
             )}
-
-            {filteredOrders.length > 0 ? (
-              filteredOrders.map((order, index) => (
-                <OrderStatusProductList
-                  products={order.items}
-                  key={index}
-                  order={order}
-                  handleViewOrderDetail={() => handleViewOrderDetail(order._id)}
-                />
-              ))
-            ) : (
-              <div className="order-status-empty"></div>
-            )}
           </div>
         </div>
       </div>
