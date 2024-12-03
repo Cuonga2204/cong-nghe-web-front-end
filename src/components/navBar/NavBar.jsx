@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import CartNavbar from "./CartNavbar";
 import { CartContext } from "../../context/CartContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -15,6 +15,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { faCoffee } from "@fortawesome/free-solid-svg-icons";
 import HeaderUserMenu from "./HeaderUserMenu";
+import { useState } from "react";
+import axios from "axios";
 const HeaderLogo = () => {
   return (
     <Link to={"/"}>
@@ -65,10 +67,10 @@ const HeaderMenuItem = ({ iconName, iconClass, title, onClick }) => {
 
 const HeaderSearchListItem = ({ iconName, iconClass, title, itemClass }) => {
   const { cartItems } = useContext(CartContext);
-  const countProducts = cartItems.reduce(
-    (total, item) => (total += item.quantity),
-    0
-  );
+  const countProducts = Array.isArray(cartItems)
+    ? cartItems.reduce((total, item) => total + item.quantity, 0)
+    : 0;
+
   return (
     <li className={itemClass}>
       <div className="base-icon">
@@ -92,6 +94,31 @@ const HeaderSearchListItem = ({ iconName, iconClass, title, itemClass }) => {
   );
 };
 const NavBar = ({ setFilter }) => {
+  const [userData, setUserData] = useState(null);
+  const userId = localStorage.getItem("userId");
+  // console.log(userId);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await axios.get(`/user/get-details/${userId}`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+          },
+        });
+        if (response.status === 200 && response.data.data) {
+          setUserData(response.data.data);
+        }
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+    fetchUserData();
+  }, []);
+  // console.log(userData);
+
+  // console.log(`http://localhost:4000${userData.imageUrl}`);
+  // console.log(`http://localhost:4000/uploads/images/avatarDefault.png`)
   const handleFilterClick = (filter) => {
     setFilter(filter);
   };
@@ -130,12 +157,25 @@ const NavBar = ({ setFilter }) => {
                   iconClass="fa-solid fa-file-invoice-dollar"
                   title="Thanh toán & Tiện ích"
                 />
-                <HeaderSearchListItem
-                  itemClass="header-search-list__item header__navbar-user"
-                  iconName={faCircleUser}
-                  iconClass="fa-solid fa-circle-user"
-                  title="Tài khoản của tôi"
-                />
+                <li className="header-search-list__item header__navbar-user">
+                  {userData?.imageUrl ? (
+                    <img
+                      src={`http://localhost:4000${userData.imageUrl}`}
+                      alt="Avatar"
+                      className="header-avatar-img"
+                    />
+                  ) : (
+                    <FontAwesomeIcon
+                      icon={faCircleUser}
+                      className="header-avatar-icon"
+                    />
+                  )}
+                  <span className="header-avatar-name">
+                    {userData?.name || "Tài khoản của tôi"}
+                  </span>
+                  <HeaderUserMenu />
+                </li>
+                {/* <img src={`http://localhost:4000${userData.imageUrl}`} alt="" /> */}
                 <HeaderSearchListItem
                   itemClass="header-search-list__item header__navbar-cart"
                   iconName={faCartShopping}

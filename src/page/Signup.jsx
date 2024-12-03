@@ -6,11 +6,16 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+// import { useMutation } from "@tanstack/react-query";
+
 export const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  // const [isSignUp, setIsSignUp] = useState(false);
+
   const navigate = useNavigate();
+  // const [listAccount, setListAccount] = useState(DEFAULT_ACCOUNTS);
   const handleEmailChange = (e) => setEmail(e.target.value);
   const handlePasswordChange = (e) => setPassword(e.target.value);
   const handleConfirmPasswordChange = (e) => setConfirmPassword(e.target.value);
@@ -32,6 +37,11 @@ export const Signup = () => {
       console.log("erro", error);
     }
 
+    // if (password !== confirmPassword) {
+    //   alert("Mật khẩu không khớp!");
+    //   return;
+    // }
+    // alert("Đăng ký thành công!");
   };
   return (
     <>
