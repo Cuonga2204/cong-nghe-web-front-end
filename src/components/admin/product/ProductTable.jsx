@@ -4,7 +4,10 @@ import { faEye, faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { useAdmin } from "../../../context/AdminContext";
 import axios from "axios";
-const ProductTable = ({ products, onDelete, onEdit, onView }) => {
+import { useNavigate } from "react-router-dom";
+import { formatPrice } from "../../utility/format";
+const ProductTable = ({ products, currentPage, limit }) => {
+  const navigate = useNavigate();
   const { getListProduct } = useAdmin();
   const handleDelete = async (productId) => {
     try {
@@ -12,6 +15,7 @@ const ProductTable = ({ products, onDelete, onEdit, onView }) => {
       if (response.status === 200) {
         console.log("User delete successfully");
         getListProduct();
+        navigate("/admin/product");
       } else {
         console.error("Failed to delete user");
       }
@@ -34,7 +38,7 @@ const ProductTable = ({ products, onDelete, onEdit, onView }) => {
         <tbody>
           {products.map((product, index) => (
             <tr key={product.id}>
-              <td>{index + 1}</td>
+              <td>{(currentPage - 1) * limit + index + 1}</td>
               <td>{product.name}</td>
               <td>
                 <img
@@ -43,15 +47,15 @@ const ProductTable = ({ products, onDelete, onEdit, onView }) => {
                   className="product-image"
                 />
               </td>
-              <td>{product.price}đ</td>
+              <td>{formatPrice(product.price)}</td>
               <td>
                 <td>
-                  <Link to={`${product.id}`}>
+                  <Link to={`/admin/product/${product.id}`}>
                     <button className="view-button">
                       <FontAwesomeIcon icon={faEye} />{" "}
                     </button>
                   </Link>
-                  <Link to={`update/${product.id}`}>
+                  <Link to={`/admin/product/update/${product.id}`}>
                     <button className="edit-button">
                       <FontAwesomeIcon icon={faEdit} />{" "}
                     </button>
