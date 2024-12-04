@@ -3,6 +3,7 @@ import CartNavbar from "./CartNavbar";
 import { CartContext } from "../../context/CartContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
+import { UserContext } from "../../context/UserContext";
 import {
   faCartShopping,
   faCircleUser,
@@ -17,6 +18,7 @@ import { faCoffee } from "@fortawesome/free-solid-svg-icons";
 import HeaderUserMenu from "./HeaderUserMenu";
 import { useState } from "react";
 import axios from "axios";
+import { useSearch } from "../../context/SearchContext";
 const HeaderLogo = () => {
   return (
     <Link to={"/"}>
@@ -96,6 +98,9 @@ const HeaderSearchListItem = ({ iconName, iconClass, title, itemClass }) => {
 const NavBar = ({ setFilter }) => {
   const [userData, setUserData] = useState(null);
   const userId = localStorage.getItem("userId");
+  const { triggerFetch } = useContext(UserContext);
+  const { setSearchTerm } = useSearch();
+
   // console.log(userId);
 
   useEffect(() => {
@@ -114,7 +119,8 @@ const NavBar = ({ setFilter }) => {
       }
     };
     fetchUserData();
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [triggerFetch]);
   // console.log(userData);
 
   // console.log(`http://localhost:4000${userData.imageUrl}`);
@@ -135,6 +141,7 @@ const NavBar = ({ setFilter }) => {
                   className="header-filter-search__input"
                   type="text"
                   placeholder="Nhập tên máy tính, phụ kiện máy tính, ... cần tìm"
+                  onChange={(e) => setSearchTerm(e.target.value)}
                 />
                 <HeaderSearchHistory />
                 <button className="header-filter-search__button">
